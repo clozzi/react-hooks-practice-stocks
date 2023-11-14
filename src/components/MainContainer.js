@@ -4,23 +4,28 @@ import PortfolioContainer from "./PortfolioContainer";
 import SearchBar from "./SearchBar";
 
 function MainContainer() {
-  const [stockData, setStockData] = useState([]);
+  const [stocks, setStocks] = useState([]);
+  const [myStocks, setMyStocks] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:3001/stocks')
     .then(r => r.json())
-    .then(data => setStockData(data))
-  })
+    .then(data => setStocks(data))
+  }, [])
+
+  const handleAddStock = (stockToAdd) => {
+    setMyStocks(currentMyStocks => [...currentMyStocks, stockToAdd])
+  }
 
   return (
     <div>
       <SearchBar />
       <div className="row">
         <div className="col-8">
-          <StockContainer stockData={stockData} />
+          <StockContainer stocks={stocks} handleAddStock={handleAddStock}/>
         </div>
         <div className="col-4">
-          <PortfolioContainer />
+          <PortfolioContainer myStocks={myStocks} />
         </div>
       </div>
     </div>
