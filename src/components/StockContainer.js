@@ -1,9 +1,10 @@
 import React from "react";
 import Stock from "./Stock";
 
-function StockContainer({ stocks, handleAddStock, sortBy }) {
+function StockContainer({ stocks, handleAddStock, sortBy, filterBy }) {
 
   const displayStocks = stocks
+                    .filter(stock => filterBy === "" || stock.type.toLowerCase() === filterBy.toLowerCase())
                     .sort((stockOne, stockTwo) => {
                       if (sortBy === "Alphabetically") {
                         const nameA = stockOne.name.toUpperCase();
