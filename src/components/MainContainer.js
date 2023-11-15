@@ -17,6 +17,10 @@ function MainContainer() {
     setMyStocks(currentMyStocks => [...currentMyStocks, stockToAdd])
   }
 
+  const handleRemoveStock = (stockToRemove) => {
+    setMyStocks(currentMyStocks => currentMyStocks.filter(stock => stock.id !== stockToRemove.id))
+  }
+
   return (
     <div>
       <SearchBar />
@@ -25,7 +29,7 @@ function MainContainer() {
           <StockContainer stocks={stocks} handleAddStock={handleAddStock}/>
         </div>
         <div className="col-4">
-          <PortfolioContainer myStocks={myStocks} />
+          <PortfolioContainer myStocks={myStocks} handleRemoveStock={handleRemoveStock} />
         </div>
       </div>
     </div>
