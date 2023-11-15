@@ -16,7 +16,7 @@ function StockContainer({ stocks, handleAddStock, sortBy }) {
                         }
                         return 0;
                       } else {
-                        return 0;
+                        return stockOne.price - stockTwo.price;
                       }
                     })
                     .map(stock => <Stock key={stock.id} {...stock} handleStock={handleAddStock} />)
